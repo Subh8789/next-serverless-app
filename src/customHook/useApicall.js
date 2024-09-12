@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { contactApi, detailsApi } from '../utils/ApiList/axiosapi.js';
+import endpoints from '../utils/ApiList/axiosapi.js';
  
 export default function useApicall() {
   const [detailData, setDetailData] = useState([]);
@@ -11,8 +11,8 @@ export default function useApicall() {
     const fetchData = async () => {
       try {
         const [detailsResponse, contactResponse] = await Promise.all([
-          axios.get(detailsApi),
-          axios.get(contactApi),
+          axios.get(endpoints.detailsApi),
+          axios.get(endpoints.contactApi),
         ]);
  
         setDetailData(detailsResponse.data);

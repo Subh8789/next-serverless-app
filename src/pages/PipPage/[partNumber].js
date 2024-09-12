@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Pip from '../../components/pip';
-import { detailsApi, contactApi ,getAvailability, getPriceDetail, getProductDetail } from '../../utils/ApiList/axiosapi';
+//import { detailsApi, contactApi ,getAvailability, getPriceDetail, getProductDetail } from '../../utils/ApiList/axiosapi';
+import endpoints from '../../utils/ApiList/axiosapi';
 import usePdpApiCall from '../../customHook/usePdpApiCall';
 import axios from 'axios';
 
@@ -11,9 +12,9 @@ import axios from 'axios';
 
   console.log('partNumber', partNumber);
 
-  const pdpData = usePdpApiCall(getProductDetail, partNumber);
-  const priceData = usePdpApiCall(getPriceDetail, partNumber);
-  const getAvail = usePdpApiCall(getAvailability, partNumber);
+  const pdpData = usePdpApiCall(endpoints.getProductDetail, partNumber);
+  const priceData = usePdpApiCall(endpoints.getPriceDetail, partNumber);
+  const getAvail = usePdpApiCall(endpoints.getAvailability, partNumber);
 
   console.log('data from PipPage', pdpData);
 
@@ -28,8 +29,8 @@ import axios from 'axios';
 export async function getServerSideProps() {
   try {
       const [detailsResponse, contactResponse] = await Promise.all([
-          axios.get(detailsApi),
-          axios.get(contactApi)
+          axios.get(endpoints.detailsApi),
+          axios.get(endpoints.contactApi)
       ]);
 
       return {
